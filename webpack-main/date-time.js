@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import App from '../src/DateTimeApp.vue'
-import SuiVue from 'semantic-ui-vue';
-import 'semantic-ui-css/semantic.min.css';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.use(SuiVue);
+Vue.use(ElementUI);
 
 new Vue({
   render: h => h(App)
