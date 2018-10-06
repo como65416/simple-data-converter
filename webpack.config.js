@@ -6,9 +6,9 @@ module.exports = {
   entry: {
     'ChineseConvert': './webpack-main/chinese.js',
     'DateTimeConvert': './webpack-main/date-time.js',
-    'HexDecimalConvert': './webpack-main/hex-decimal.js',
     'ImageDataUrlConvert': './webpack-main/image-data-url.js'
   },
+  target: 'electron-renderer',
   output: {
     filename: '[name]-bundle.js',
     chunkFilename: '[name].bundle.js',
