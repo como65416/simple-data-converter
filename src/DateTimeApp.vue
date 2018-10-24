@@ -9,6 +9,23 @@
         </el-select>
       </el-input>
     </div>
+    <el-button-group>
+      <el-button plain type="warning" @click="subtime('hour')">- 1 Hour</el-button>
+      <el-button plain type="success" @click="addtime('hour')">+ 1 Hour</el-button>
+    </el-button-group>
+    <el-button-group>
+      <el-button plain type="warning" @click="subtime('day')">- 1 Day</el-button>
+      <el-button plain type="success" @click="addtime('day')">+ 1 Day</el-button>
+    </el-button-group>
+    <el-button-group>
+      <el-button plain type="warning" @click="subtime('month')">- 1 Month</el-button>
+      <el-button plain type="success" @click="addtime('month')">+ 1 Month</el-button>
+    </el-button-group>
+    <el-button-group>
+      <el-button plain type="warning" @click="subtime('year')">- 1 Year</el-button>
+      <el-button plain type="success" @click="addtime('year')">+ 1 Year</el-button>
+    </el-button-group>
+    <br><br>
     <el-select v-model="gmt" slot="prepend" placeholder="Select">
       <el-option v-bind:label="'GMT+' + (index - 1)" v-bind:value="index - 1" v-for="index in 24" :key="index"></el-option>
     </el-select>
@@ -34,6 +51,44 @@ export default {
       input_type: 'timestamp',
       time_value: now_time,
       gmt: -(new Date().getTimezoneOffset() / 60)
+    }
+  },
+  methods: {
+    addtime: function(unit) {
+      let d = new Date(this.input_value * 1000);
+      let year = d.getFullYear();
+      let month = d.getMonth();
+      let day = d.getDate();
+      let hours = d.getHours();
+      let minutes = d.getMinutes();
+      let seconds = d.getSeconds();
+      if (unit == 'hour') {
+        this.input_value = parseInt(new Date(year, month, day, hours + 1, minutes, seconds).getTime() / 1000).toString();
+      } else if (unit == 'day') {
+        this.input_value = parseInt(new Date(year, month, day + 1, hours, minutes, seconds).getTime() / 1000).toString();
+      } else if (unit == 'month') {
+        this.input_value = parseInt(new Date(year, month + 1, day, hours, minutes, seconds).getTime() / 1000).toString();
+      } else if (unit == 'year') {
+        this.input_value = parseInt(new Date(year + 1, month, day, hours, minutes, seconds).getTime() / 1000).toString();
+      }
+    },
+    subtime: function(unit) {
+      let d = new Date(this.input_value * 1000);
+      let year = d.getFullYear();
+      let month = d.getMonth();
+      let day = d.getDate();
+      let hours = d.getHours();
+      let minutes = d.getMinutes();
+      let seconds = d.getSeconds();
+      if (unit == 'hour') {
+        this.input_value = parseInt(new Date(year, month, day, hours - 1, minutes, seconds).getTime() / 1000).toString();
+      } else if (unit == 'day') {
+        this.input_value = parseInt(new Date(year, month, day - 1, hours, minutes, seconds).getTime() / 1000).toString();
+      } else if (unit == 'month') {
+        this.input_value = parseInt(new Date(year, month - 1, day, hours, minutes, seconds).getTime() / 1000).toString();
+      } else if (unit == 'year') {
+        this.input_value = parseInt(new Date(year - 1, month, day, hours, minutes, seconds).getTime() / 1000).toString();
+      }
     }
   },
   watch: {
