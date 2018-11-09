@@ -9,6 +9,7 @@
         </el-select>
       </el-input>
     </div>
+    <el-button plain type="primary" @click="setToNowTime()">Now Time</el-button>
     <el-button-group>
       <el-button plain type="warning" @click="subtime('hour')">- 1 Hour</el-button>
       <el-button plain type="success" @click="addtime('hour')">+ 1 Hour</el-button>
@@ -54,40 +55,63 @@ export default {
     }
   },
   methods: {
+    setToNowTime: function() {
+      let newDate = new Date();
+      if (this.input_type == 'timestamp') {
+        this.input_value = parseInt(newDate.getTime() / 1000).toString();
+      } else {
+        this.input_value = newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate() + " " + newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds();
+      }
+    },
     addtime: function(unit) {
-      let d = new Date(this.input_value * 1000);
+      let d = (this.input_type == 'timestamp') ? new Date(this.input_value * 1000) : new Date(this.input_value);
       let year = d.getFullYear();
       let month = d.getMonth();
       let day = d.getDate();
       let hours = d.getHours();
       let minutes = d.getMinutes();
       let seconds = d.getSeconds();
+      let newDate = null;
       if (unit == 'hour') {
-        this.input_value = parseInt(new Date(year, month, day, hours + 1, minutes, seconds).getTime() / 1000).toString();
+        newDate = new Date(year, month, day, hours + 1, minutes, seconds);
       } else if (unit == 'day') {
-        this.input_value = parseInt(new Date(year, month, day + 1, hours, minutes, seconds).getTime() / 1000).toString();
+        newDate = new Date(year, month, day + 1, hours, minutes, seconds);
       } else if (unit == 'month') {
-        this.input_value = parseInt(new Date(year, month + 1, day, hours, minutes, seconds).getTime() / 1000).toString();
+        newDate = new Date(year, month + 1, day, hours, minutes, seconds);
       } else if (unit == 'year') {
-        this.input_value = parseInt(new Date(year + 1, month, day, hours, minutes, seconds).getTime() / 1000).toString();
+        newDate = new Date(year + 1, month, day, hours, minutes, seconds);
+      }
+
+      if (this.input_type == 'timestamp') {
+        this.input_value = (newDate.getTime() / 1000).toString();
+      } else {
+        this.input_value = newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate() + " " + newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds();
       }
     },
     subtime: function(unit) {
-      let d = new Date(this.input_value * 1000);
+      let d = (this.input_type == 'timestamp') ? new Date(this.input_value * 1000) : new Date(this.input_value);
       let year = d.getFullYear();
       let month = d.getMonth();
       let day = d.getDate();
       let hours = d.getHours();
       let minutes = d.getMinutes();
       let seconds = d.getSeconds();
+
+      let newDate = null;
       if (unit == 'hour') {
-        this.input_value = parseInt(new Date(year, month, day, hours - 1, minutes, seconds).getTime() / 1000).toString();
+        newDate = new Date(year, month, day, hours - 1, minutes, seconds);
       } else if (unit == 'day') {
-        this.input_value = parseInt(new Date(year, month, day - 1, hours, minutes, seconds).getTime() / 1000).toString();
+        newDate = new Date(year, month, day - 1, hours, minutes, seconds);
       } else if (unit == 'month') {
-        this.input_value = parseInt(new Date(year, month - 1, day, hours, minutes, seconds).getTime() / 1000).toString();
+        newDate = new Date(year, month - 1, day, hours, minutes, seconds);
       } else if (unit == 'year') {
-        this.input_value = parseInt(new Date(year - 1, month, day, hours, minutes, seconds).getTime() / 1000).toString();
+        newDate = new Date(year - 1, month, day, hours, minutes, seconds);
+      }
+
+      if (this.input_type == 'timestamp') {
+        this.input_value = (newDate.getTime() / 1000).toString();
+      } else {
+        this.input_value = newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate() + " " + newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds();
       }
     }
   },
