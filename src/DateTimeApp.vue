@@ -140,13 +140,13 @@ export default {
   computed: {
     output_date() {
       let weekday = [];
-      weekday[0] = "Monday";
-      weekday[1] = "Tuesday";
-      weekday[2] = "Wednesday";
-      weekday[3] = "Thursday";
-      weekday[4] = "Friday";
-      weekday[5] = "Saturday";
-      weekday[6] = "Sunday";
+      weekday[0] = "Sunday";
+      weekday[1] = "Monday";
+      weekday[2] = "Tuesday";
+      weekday[3] = "Wednesday";
+      weekday[4] = "Thursday";
+      weekday[5] = "Friday";
+      weekday[6] = "Saturday";
       let system_gmt = - (new Date().getTimezoneOffset() / 60);
       let d = new Date((this.time_value + (this.gmt - system_gmt) * 3600) * 1000);
 
