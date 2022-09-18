@@ -22,10 +22,10 @@
 </style>
 
 <script>
-import * as ace from 'ace-builds/src-noconflict/ace';
+import 'ace-builds/src-noconflict/ace';
 import 'ace-builds/webpack-resolver';
+import * as OpenCC from 'opencc-js';
 import 'semantic-ui-button/button.min.css';
-import opencc from 'node-opencc';
 
 export default {
   data () {
@@ -35,7 +35,6 @@ export default {
   },
   mounted() {
     var editor = ace.edit("editor");
-    var self = this;
     editor.setValue("簡體繁體轉換工具");
     editor.setTheme("ace/theme/monokai");
     editor.container.style.lineHeight = 1.3;
@@ -43,10 +42,12 @@ export default {
   },
   methods: {
     chtToChs: function () {
-      this.editor.setValue(opencc.traditionalToSimplified(this.editor.getValue()));
+      const converter = OpenCC.Converter({ from: 'tw', to: 'cn' });
+      this.editor.setValue(converter(this.editor.getValue()));
     },
     chsToCht: function () {
-      this.editor.setValue(opencc.simplifiedToTraditional(this.editor.getValue()));
+      const converter = OpenCC.Converter({ from: 'cn', to: 'tw' });
+      this.editor.setValue(converter(this.editor.getValue()));
     }
   }
 }

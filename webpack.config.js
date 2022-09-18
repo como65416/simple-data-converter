@@ -8,7 +8,7 @@ module.exports = {
     'DateTimeConvert': './webpack-main/date-time.js',
     'ImageDataUrlConvert': './webpack-main/image-data-url.js'
   },
-  target: 'electron-renderer',
+  target: 'web',
   output: {
     filename: '[name]-bundle.js',
     chunkFilename: '[name].bundle.js',
