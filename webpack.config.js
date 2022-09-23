@@ -6,7 +6,8 @@ module.exports = {
   entry: {
     'ChineseConvert': './webpack-main/chinese.js',
     'DateTimeConvert': './webpack-main/date-time.js',
-    'ImageDataUrlConvert': './webpack-main/image-data-url.js'
+    'ImageDataUrlConvert': './webpack-main/image-data-url.js',
+    'WordConvert': './webpack-main/word-convert.js'
   },
   target: 'web',
   output: {

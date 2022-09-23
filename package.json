@@ -9,6 +9,7 @@
     "image-type": "^3.0.0",
     "node-opencc": "^2.0.1",
     "opencc-js": "^1.0.4",
+    "pluralize": "^8.0.0",
     "read-chunk": "^3.0.0",
     "semantic-ui-button": "^2.3.2",
     "vue": "^2.5.16"
